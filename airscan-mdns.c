@@ -724,19 +724,19 @@ mdns_avahi_browser_callback (AvahiServiceBrowser *b, AvahiIfIndex interface,
 
             mdns->resolvers = ptr_array_append(mdns->resolvers, r);
 
-//            /* Initiate resolver -- look for IPv6 addresses */
-//            r = avahi_service_resolver_new(mdns_avahi_client, interface,
-//                                           protocol, name, type, domain, AVAHI_PROTO_INET6, 0,
-//                                           mdns_avahi_resolver_callback, mdns);
-//
-//            if (r == NULL) {
-//                mdns_perror(MDNS_ACTION_RESOLVE, interface, protocol, type, name);
+            /* Initiate resolver -- look for IPv6 addresses */
+            r = avahi_service_resolver_new(mdns_avahi_client, interface,
+                                           protocol, name, type, domain, AVAHI_PROTO_INET6, 0,
+                                           mdns_avahi_resolver_callback, mdns);
+
+            if (r == NULL) {
+                mdns_perror(MDNS_ACTION_RESOLVE, interface, protocol, type, name);
 //                mdns_avahi_client_restart_defer();
-//                break;
-//            }
-//
-//            /* Attach resolver to device state */
-//            mdns->resolvers = ptr_array_append(mdns->resolvers, r);
+                break;
+            }
+
+            /* Attach resolver to device state */
+            mdns->resolvers = ptr_array_append(mdns->resolvers, r);
             break;
 
     case AVAHI_BROWSER_REMOVE:
